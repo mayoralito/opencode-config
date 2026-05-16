@@ -129,6 +129,23 @@ snip gain --top 10
 
 You MUST use open-source libraries and third-party tools instead of creating your own solutions. Only write a custom implementation when you have a compelling reason or no suitable tool exists.
 
+## Parallel Subagents
+
+Use subagents aggressively for any work that can run in parallel. If you have a todo list with multiple independent items, batch them into `general` subagents and launch them all at once. Never do sequential work when parallel work is possible.
+
+**How to use them:**
+
+- Launch multiple `task` tool calls in a single response — they run concurrently
+- Give each subagent a detailed, self-contained prompt describing exactly what to do and what to return
+- Use `general` for tasks needing file writes or complex multi-step work
+- Use `explore` only for simple, read-only searches
+
+**Don't use subagents for:**
+
+- Tasks that depend on each other's output — do those sequentially
+- Single trivial operations — just use the tools directly
+- Anything requiring interactive input
+
 ## Do Only What Is Asked
 
 Do only what is explicitly asked. Answer questions without taking action. Complete the requested task — do not add extra features, make unrelated changes, or go above and beyond.
