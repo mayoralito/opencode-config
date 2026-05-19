@@ -100,41 +100,49 @@ rg --pcre2 "(?<=prefix)pattern"
 `rg -r` previews replacements without modifying files. Use it to verify changes before applying.
 
 **Preview a simple replacement:**
+
 ```
 rg "oldFunction" -r "newFunction"
 ```
 
 **Preview replacement limited to file types:**
+
 ```
 rg "oldFunction" -r "newFunction" -t ts -t tsx
 ```
 
 **Preview replacement with whole-word match:**
+
 ```
 rg -w "config" -r "settings"
 ```
 
 **Preview replacement with regex capture groups:**
+
 ```
 rg "(foo)(bar)" -r "$2$1"
 ```
 
 **Preview replacement with named capture groups:**
+
 ```
 rg "(?<key>\w+)=(?<value>\w+)" -r "$value=$key"
 ```
 
 **Preview replacement in specific files by glob:**
+
 ```
 rg "deprecated" -r "removed" -g "*.js"
 ```
 
 **Preview replacement with context:**
+
 ```
 rg "old" -r "new" -C2
 ```
 
 **Pipe to a file to review all changes:**
+
 ```
 rg "old" -r "new" > changes.txt
 ```

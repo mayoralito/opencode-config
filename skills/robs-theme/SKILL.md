@@ -1,11 +1,11 @@
 ---
 name: robs-theme
-description: "Use when working on brain.tdvm.net services, or when asked to apply `rob's` or `my` style. Applies Rob's personal design system: dark purple palette with pink/cyan/purple accents, specific typography hierarchy, and component patterns (cards, badges, alerts, buttons). Don't use for generic styling or other projects."
+description: "Use when working on *.tdvm.net and *.tedivm.com services, or when asked to apply `rob's` or `my` style. Applies Rob's personal design system: dark purple palette with pink/cyan/purple accents, specific typography hierarchy, and component patterns (cards, badges, alerts, buttons). Don't use for generic styling or other projects."
 ---
 
 ## Quick start
 
-Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net service. Use the color tokens, typography rules, and component patterns below consistently.
+Apply the design system from `https://tedivm.github.io/robs-style-guide/` to any of Rob's services. Use the color tokens, typography rules, and component patterns below consistently.
 
 ## Color tokens
 
@@ -19,8 +19,8 @@ Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net s
 | Secondary  | `#01cdfe` | Cyan accent, links, code text |
 | Tertiary   | `#b96dff` | Purple accent, headings       |
 | Body text  | `#dcdcdc` | Paragraphs, labels            |
-| Muted      | `#888`    | Secondary text                |
-| Dim        | `#666`    | Tertiary text                 |
+| Muted      | `#b4b4b4` | Secondary text                |
+| Dim        | `#999`    | Tertiary text                 |
 | Success    | `#50c878` | Positive feedback             |
 | Warning    | `#ffbe32` | Cautionary messages           |
 | Error      | `#ff5050` | Errors, critical issues       |
@@ -34,38 +34,38 @@ Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net s
 
 ### Heading hierarchy
 
-| Level | Size   | Color                | Extra styling                              |
-| ----- | ------ | -------------------- | ------------------------------------------ |
-| H1    | `1.8rem` | `#ff71ce`          | `text-shadow: 0 0 20px rgba(255,113,206,0.4)` |
-| H2    | `1.3rem` | `#01cdfe`          | `border-bottom: 1px solid #3d2b5a`, `padding-bottom: 0.4rem` |
-| H3    | `1.1rem` | `#b96dff`          | —                                          |
-| H4    | `1rem`  | `#dcdcdc`          | —                                          |
-| H5    | `0.9rem` | `#b96dff`          | `text-transform: uppercase`, `letter-spacing: 0.05em` |
-| H6    | `0.85rem` | `#888`           | `text-transform: uppercase`, `letter-spacing: 0.05em` |
+| Level | Size      | Color     | Extra styling                                                |
+| ----- | --------- | --------- | ------------------------------------------------------------ |
+| H1    | `1.8rem`  | `#ff71ce` | `text-shadow: 0 0 20px rgba(255,113,206,0.4)`                |
+| H2    | `1.3rem`  | `#01cdfe` | `border-bottom: 1px solid #3d2b5a`, `padding-bottom: 0.4rem` |
+| H3    | `1.1rem`  | `#b96dff` | —                                                            |
+| H4    | `1rem`    | `#dcdcdc` | —                                                            |
+| H5    | `0.9rem`  | `#b96dff` | `text-transform: uppercase`, `letter-spacing: 0.05em`        |
+| H6    | `0.85rem` | `#888`    | `text-transform: uppercase`, `letter-spacing: 0.05em`        |
 
 ### Text color utilities
 
-| Class           | Color      |
-| --------------- | ---------- |
-| `.text-pink`    | `#ff71ce`  |
-| `.text-cyan`    | `#01cdfe`  |
-| `.text-purple`  | `#b96dff`  |
-| `.text-success` | `#50c878`  |
-| `.text-warn`    | `#ffbe32`  |
-| `.text-error`   | `#ff5050`  |
+| Class           | Color     |
+| --------------- | --------- |
+| `.text-pink`    | `#ff71ce` |
+| `.text-cyan`    | `#01cdfe` |
+| `.text-purple`  | `#b96dff` |
+| `.text-success` | `#50c878` |
+| `.text-warn`    | `#ffbe32` |
+| `.text-error`   | `#ff5050` |
 
 ### Text utility classes
 
-| Class         | Effect                                      |
-| ------------- | -------------------------------------------- |
-| `.muted`      | `color: #888`                               |
-| `.dim`        | `color: #666`                               |
-| `.text-sm`    | `font-size: 0.85rem`                        |
-| `.text-xs`    | `font-size: 0.75rem`                        |
-| `.font-bold`  | `font-weight: 700`                          |
-| `.font-mono`  | `font-family: 'Source Code Pro', 'Roboto Mono', monospace` |
-| `.uppercase`  | `text-transform: uppercase`, `letter-spacing: 0.05em` |
-| `.truncate`   | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
+| Class        | Effect                                                           |
+| ------------ | ---------------------------------------------------------------- |
+| `.muted`     | `color: #b4b4b4`                                                 |
+| `.dim`       | `color: #999`                                                    |
+| `.text-sm`   | `font-size: 0.85rem`                                             |
+| `.text-xs`   | `font-size: 0.75rem`                                             |
+| `.font-bold` | `font-weight: 700`                                               |
+| `.font-mono` | `font-family: 'Source Code Pro', 'Roboto Mono', monospace`       |
+| `.uppercase` | `text-transform: uppercase`, `letter-spacing: 0.05em`            |
+| `.truncate`  | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
 
 ## Inline elements
 
@@ -108,14 +108,14 @@ Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net s
 - Base: `display: inline-block`, `padding: 2px 8px`, `border-radius: 12px`, `font-size: 0.75em`, `font-weight: 600`
 - Semi-transparent backgrounds with matching text color:
 
-| Class           | Background                      | Color      |
-| --------------- | ------------------------------- | ---------- |
-| `.badge-app`    | `rgba(255,113,206,0.15)`       | `#ff71ce`  |
-| `.badge-ai`     | `rgba(1,205,254,0.15)`         | `#01cdfe`  |
-| `.badge-infra`  | `rgba(185,109,255,0.15)`       | `#b96dff`  |
-| `.badge-success`| `rgba(80,200,120,0.15)`        | `#50c878`  |
-| `.badge-warn`   | `rgba(255,190,50,0.15)`        | `#ffbe32`  |
-| `.badge-error`  | `rgba(255,80,80,0.15)`         | `#ff5050`  |
+| Class            | Background               | Color     |
+| ---------------- | ------------------------ | --------- |
+| `.badge-app`     | `rgba(255,113,206,0.15)` | `#ff71ce` |
+| `.badge-ai`      | `rgba(1,205,254,0.15)`   | `#01cdfe` |
+| `.badge-infra`   | `rgba(185,109,255,0.15)` | `#b96dff` |
+| `.badge-success` | `rgba(80,200,120,0.15)`  | `#50c878` |
+| `.badge-warn`    | `rgba(255,190,50,0.15)`  | `#ffbe32` |
+| `.badge-error`   | `rgba(255,80,80,0.15)`   | `#ff5050` |
 
 ## Tags (`.tag`)
 
@@ -134,24 +134,24 @@ Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net s
 - Base `.btn`: `display: inline-block`, `border-radius: 4px`, `font-size: 0.85rem`, `font-weight: 600`, `text-decoration: none`, `border: 1px solid transparent`, `cursor: pointer`
 - Sizes: `.btn-sm` (`padding: 0.25rem 0.6rem; font-size: 0.75rem`), default (`padding: 0.5rem 1rem`), `.btn-lg` (`padding: 0.75rem 1.5rem; font-size: 1rem`)
 
-| Class             | Background               | Color      | Border       | Hover background        |
-| ----------------- | ------------------------ | ---------- | ------------ | ----------------------- |
-| `.btn-primary`    | `rgba(255,113,206,0.15)` | `#ff71ce`  | `#ff71ce`    | `rgba(255,113,206,0.3)` |
-| `.btn-secondary`  | `rgba(1,205,254,0.15)`   | `#01cdfe`  | `#01cdfe`    | `rgba(1,205,254,0.3)`   |
-| `.btn-subtle`     | `transparent`            | `#888`     | `#3d2b5a`    | color `#dcdcdc`, border `#888` |
+| Class            | Background               | Color     | Border    | Hover background               |
+| ---------------- | ------------------------ | --------- | --------- | ------------------------------ |
+| `.btn-primary`   | `rgba(255,113,206,0.15)` | `#ff71ce` | `#ff71ce` | `rgba(255,113,206,0.3)`        |
+| `.btn-secondary` | `rgba(1,205,254,0.15)`   | `#01cdfe` | `#01cdfe` | `rgba(1,205,254,0.3)`          |
+| `.btn-subtle`    | `transparent`            | `#888`    | `#3d2b5a` | color `#dcdcdc`, border `#888` |
 
 ## Alerts (`.instructions`)
 
 - Base: `background: #2d1b4e`, `padding: 1rem`, `border-radius: 5px`, `border-left: 3px solid`
 - Variants (left border color):
 
-| Class                   | Border color |
-| ----------------------- | ------------ |
-| `.instructions` (default) | `#ff71ce`  |
-| `.instructions-info`    | `#01cdfe`   |
-| `.instructions-success` | `#50c878`   |
-| `.instructions-warn`    | `#ffbe32`   |
-| `.instructions-error`   | `#ff5050`   |
+| Class                     | Border color |
+| ------------------------- | ------------ |
+| `.instructions` (default) | `#ff71ce`    |
+| `.instructions-info`      | `#01cdfe`    |
+| `.instructions-success`   | `#50c878`    |
+| `.instructions-warn`      | `#ffbe32`    |
+| `.instructions-error`     | `#ff5050`    |
 
 ## Blockquote
 
@@ -185,13 +185,13 @@ Apply the design system from `styleguide.brain.tdvm.net` to any brain.tdvm.net s
 
 ## Layout utilities
 
-| Class        | Effect                                     |
-| ------------ | ------------------------------------------ |
-| `.grid`      | `display: grid; gap: 1rem`                 |
-| `.grid-2`    | `grid-template-columns: 1fr 1fr`           |
-| `.grid-3`    | `grid-template-columns: 1fr 1fr 1fr`       |
+| Class        | Effect                                            |
+| ------------ | ------------------------------------------------- |
+| `.grid`      | `display: grid; gap: 1rem`                        |
+| `.grid-2`    | `grid-template-columns: 1fr 1fr`                  |
+| `.grid-3`    | `grid-template-columns: 1fr 1fr 1fr`              |
 | `.flex`      | `display: flex; gap: 0.5rem; align-items: center` |
-| `.flex-wrap` | `flex-wrap: wrap`                          |
+| `.flex-wrap` | `flex-wrap: wrap`                                 |
 
 ## Tool cards
 

@@ -5,13 +5,13 @@ description: "All actions on GitHub must use this skill. Covers pull requests, i
 
 ## Quick Start
 
-All `gh` commands support `-R OWNER/REPO` to target a specific repository. When omitted, the current directory's repo is used.
-
 Verify authentication first:
 
 ```
 gh auth status
 ```
+
+All other `gh` commands support `-R OWNER/REPO` to target a specific repository. When omitted, the current directory's repo is used.
 
 ## Pull Requests
 

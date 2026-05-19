@@ -22,19 +22,19 @@ If missing, read `references/installation_guide.md` and provide the user with th
 
 Set these defaults before asking the user anything:
 
-| Parameter | Default |
-|---|---|
-| `python_version` | `3.13` |
-| `include_github_actions` | `y` |
-| `include_agents_instructions` | `y` |
+| Parameter                     | Default |
+| ----------------------------- | ------- |
+| `python_version`              | `3.13`  |
+| `include_github_actions`      | `y`     |
+| `include_agents_instructions` | `y`     |
 
 If `whoami` returns `tedivm`, also set:
 
-| Parameter | Value |
-|---|---|
+| Parameter     | Value           |
+| ------------- | --------------- |
 | `author_name` | `Robert Hafner` |
-| `license` | `MIT license` |
-| `github_org` | `tedivm` |
+| `license`     | `MIT license`   |
+| `github_org`  | `tedivm`        |
 
 ## Workflow
 
@@ -45,7 +45,7 @@ If `whoami` returns `tedivm`, also set:
    **Web app:** Enable `fastapi`, `sqlalchemy`, `jinja2`, `aiocache`, `docker`, `requirements_files` automatically. Ask if they need background tasks — if so, discuss the choice:
    - **Celery** — distributed task queue with Redis broker. Best for I/O-bound work, periodic/scheduled jobs, or tasks that need to scale across multiple workers.
    - **QuasiQueue** — multiprocessing library that bypasses the GIL. Best for CPU-bound work that needs true parallelism on a single machine.
-   Set the chosen one to `y`.
+     Set the chosen one to `y`.
 
    **Library:** Enable `publish_to_pypi`.
 

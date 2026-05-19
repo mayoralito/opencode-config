@@ -2,6 +2,7 @@
 name: quality-checks
 description: Use when asked to "fix things", "qa", "run tests and fix things", "test until clean", or similar requests to iteratively run quality checks and fix failures until everything passes. Don't use for single-purpose tasks like running only tests or only linting without fixes.
 ---
+
 ## Quick start
 
 Discover project tooling, run all quality checks, fix failures, and repeat until everything passes.

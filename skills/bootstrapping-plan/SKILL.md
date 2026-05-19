@@ -32,6 +32,7 @@ One paragraph describing what the project is and what it does.
 ### 2. Core Architecture
 
 Mermaid diagram showing all interfaces, service layers, and data stores. Rules:
+
 - All interfaces (web frontend, API, CLI, MCP, workers) are peers — none sits in front of another
 - Python-native interfaces (FastMCP, CLI, Celery) bypass the REST layer and call the service layer directly
 - Web frontends talk through the REST API
@@ -41,6 +42,7 @@ Mermaid diagram showing all interfaces, service layers, and data stores. Rules:
 ### 3. Feature Requirements
 
 Numbered sections for each major feature area. Each section:
+
 - Bullet points of specific behaviors
 - Clear scope boundaries
 - Notes on what's TBD vs decided
@@ -48,6 +50,7 @@ Numbered sections for each major feature area. Each section:
 ### 4. Data Model (Conceptual)
 
 Mermaid ER diagram with:
+
 - All entities with their fields
 - UUID primary keys (not integers)
 - Relationships between entities

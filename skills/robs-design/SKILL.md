@@ -1,6 +1,6 @@
 ---
-name: robs-openspec-design
-description: "Use when writing the design.md artifact for an OpenSpec change. Defines the required structure, depth, and formatting conventions for design documents. don't use for proposals, specs, or tasks — this is design.md only."
+name: robs-design
+description: "MUST use when creating, writing, or generating ANY design.md file. This skill is REQUIRED for all design.md artifacts — do not skip it. Defines the mandatory structure, depth, and formatting conventions. Do NOT use for proposals, specs, or tasks — this skill is exclusively for design.md files."
 ---
 
 ## Quick start
@@ -74,7 +74,7 @@ Decisions are separated by `---` (horizontal rule).
 
 ### Decision example — with code
 
-```markdown
+````markdown
 ### D1: URL normalization with `yarl`
 
 **Decision:** Source URLs are normalized before storage and uniqueness checks using `yarl.URL`. Normalization: lowercase scheme and host, strip trailing path slashes, remove default ports (`:80` for HTTP, `:443` for HTTPS), drop query and fragment.
@@ -92,11 +92,11 @@ def normalize_url(raw: str) -> str:
     path = url.path.rstrip("/") or "/"
     return str(url.with_path(path).with_query(None).with_fragment(None))
 ```
+````
 
 `yarl` is chosen over `urllib.parse` because it provides an immutable URL object with clean manipulation methods and handles edge cases (Unicode domains, IPv6 literals) that manual parsing would miss.
 
 **Alternative considered:** `urllib.parse.urlparse` (stdlib). Rejected — requires manual reassembly, more error-prone for edge cases.
-
 
 ### Decision example — architecture (no code)
 
@@ -118,6 +118,7 @@ def normalize_url(raw: str) -> str:
 ### Data Storage models
 
 Write the complete class/structure with every field:
+
 - Identity: `id` as `Mapped[UUID]` with `primary_key=True, default=uuid4` (or equivalent)
 - References: all foreign key / reference columns with appropriate cascade behavior
 - Timestamps: `created_at` / `updated_at` with `DateTime(timezone=True)`
@@ -170,6 +171,7 @@ For complex discriminated unions (condition trees, step types, event types), use
 ### Service classes
 
 Write the complete class with all methods:
+
 - Constructor with configuration from settings
 - Core business logic methods (upsert, fetch, parse, etc.)
 - Helper methods (`_extract_*`, `_parse_*`, `_detect_*`)
@@ -223,28 +225,82 @@ The Interfaces section covers all applicable types — use the table/list format
 ```markdown
 ### REST API — Sources
 
-| Method   | Path                     | Request        | Response              | Description              |
-| -------- | ------------------------ | -------------- | --------------------- | ------------------------ |
-| `GET`    | `/sources`               | —              | `SourceRead[]`        | List all sources         |
-| `POST`   | `/sources`               | `SourceCreate` | `SourceRead`          | Create a new source      |
-| `GET`    | `/sources/{id}`          | —              | `SourceRead`          | Get source by ID         |
+| Method | Path            | Request        | Response       | Description         |
+| ------ | --------------- | -------------- | -------------- | ------------------- |
+| `GET`  | `/sources`      | —              | `SourceRead[]` | List all sources    |
+| `POST` | `/sources`      | `SourceCreate` | `SourceRead`   | Create a new source |
+| `GET`  | `/sources/{id}` | —              | `SourceRead`   | Get source by ID    |
 
 ### CLI Commands
 
-| Command          | Arguments         | Description                    |
-| ---------------- | ----------------- | ------------------------------ |
-| `fetch`          | —                 | Trigger a fetch of all sources |
-| `seed`           | —                 | Seed default sources           |
+| Command | Arguments | Description                    |
+| ------- | --------- | ------------------------------ |
+| `fetch` | —         | Trigger a fetch of all sources |
+| `seed`  | —         | Seed default sources           |
 
 ### MCP Tools
 
-| Tool               | Parameters         | Returns           | Description              |
-| ------------------ | ------------------ | ----------------- | ------------------------ |
-| `list_sources`     | —                  | `SourceRead[]`    | List all sources         |
+| Tool           | Parameters | Returns        | Description      |
+| -------------- | ---------- | -------------- | ---------------- |
+| `list_sources` | —          | `SourceRead[]` | List all sources |
 ```
 
 **See [references/fastapi-routes.md](references/fastapi-routes.md) for REST endpoint patterns.**
 **See [references/typer-cli.md](references/typer-cli.md) for CLI command patterns.**
+
+### Accessibility
+
+Every user-facing interface requires an accessibility section. Use `## Accessibility` as a top-level section after `## Interfaces`. Cover each interface type with actionable requirements, not aspirational language.
+
+```markdown
+## Accessibility
+
+### Visual Design
+
+- **Color contrast:** All text meets WCAG 2.1 AA minimum contrast ratios (4.5:1 for normal text, 3:1 for large text and UI components). Verify with automated tools during development.
+- **Color as the only indicator:** No information conveyed by color alone. Status indicators include icons, text labels, or patterns in addition to color.
+- **Focus indicators:** All interactive elements have visible focus indicators with sufficient contrast against their background. Do not remove or style `outline: none` without providing an alternative.
+- **Motion and animation:** Respect `prefers-reduced-motion`. Disable non-essential animations when the user's OS preference is set. Provide static fallbacks.
+
+### Screen Reader Support
+
+- **Semantic HTML:** Use native elements (`<button>`, `<nav>`, `<main>`, `<header>`) over generic `<div>` wrappers. Apply ARIA roles only when native semantics are insufficient.
+- **Labels and descriptions:** Every interactive element has an accessible name. Use `aria-label`, `aria-labelledby`, or visible labels — never rely on placeholder text alone.
+- **Live regions:** Dynamic content updates (notifications, data loading, errors) use `aria-live` regions with appropriate politeness (`polite` for updates, `assertive` for errors).
+- **Status messages:** Form validation, success confirmations, and error states are announced to screen readers via `role="alert"` or `aria-live` regions.
+
+### Keyboard Navigation
+
+- **Complete keyboard access:** Every interactive function is operable using keyboard alone. No keyboard traps — users can tab forward and backward through all elements.
+- **Logical tab order:** Tab order follows visual reading order. Use DOM order rather than `tabindex` positive values. Skip links provide navigation past repeated content.
+- **Custom keyboard shortcuts:** If shortcuts exist, they are documented, configurable, and do not conflict with browser or screen reader shortcuts. Provide visual indicators of active shortcuts.
+
+### TUI-Specific Requirements
+
+- **Terminal color support:** Use ANSI color codes that work on both light and dark terminal backgrounds. Do not assume a specific terminal theme.
+- **Braille display compatibility:** Ensure text output does not rely on Unicode graphics characters (block elements, drawings) for conveying information. Provide fallback text.
+- **Resize behavior:** The interface degrades gracefully when the terminal is resized. Content reflows or truncates without breaking layout.
+
+### CLI-Specific Requirements
+
+- **Help text:** Every command and flag has descriptive help text accessible via `--help`. Output is parseable and readable without color.
+- **Error messages:** Errors include actionable guidance, not just codes. Messages are descriptive enough for users who cannot see color-coded output.
+- **Structured output:** Support `--json` or similar flags for machine-readable output, enabling integration with assistive tools.
+
+### Forms and Input
+
+- **Field association:** Labels are programmatically associated with inputs via `for`/`id` pairing. Group related fields with `fieldset` and `legend`.
+- **Error identification:** Errors identify the specific field, describe the problem in plain language, and suggest corrections. Use `aria-invalid` and `aria-describedby` for programmatic association.
+- **Autofill support:** Use appropriate `autocomplete` attributes to assist password managers and form-filling tools.
+```
+
+**Checklist for every interface:**
+
+- Does it work with keyboard-only navigation?
+- Is all information accessible without color?
+- Are dynamic updates announced to assistive technology?
+- Does it respect `prefers-reduced-motion`?
+- Are error messages descriptive and actionable?
 
 ## Prose formatting rules
 
@@ -307,6 +363,27 @@ Document all new endpoints: sources CRUD, article listing and detail, pagination
 
 Document the periodic task (scheduling, lock for overlap prevention) and manual task. Cover the `_syncify` bridge pattern for running async service code from sync task runners. Include the lock key format and TTL behavior.
 ```
+
+## Architecture review and changes
+
+**Before writing the design, always check if `docs/dev/architecture.md` exists in the project.** If it does, read it in full. The existing architecture document is your primary source of truth for how the system is currently structured — understanding it is essential before making any design decisions. Note existing conventions, patterns, component boundaries, and technology choices.
+
+After reviewing, include a dedicated subsection in the design documenting any changes needed to the architecture file:
+
+```markdown
+### `docs/dev/architecture.md` changes
+
+List every section of the architecture document that needs to be updated, added, or removed. Include the exact prose or diagrams that should be inserted.
+
+Examples:
+
+- New component added to the high-level diagram
+- New data flow between existing services
+- Changed deployment topology
+- Updated technology choices or conventions
+```
+
+If the file does not exist, note this explicitly: "No `docs/dev/architecture.md` exists in the project."
 
 ## Structural discipline
 

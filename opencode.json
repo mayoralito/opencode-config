@@ -1,11 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "formatter": true,
   "provider": {
     "vllm": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "vLLM",
       "options": {
-        "baseURL": "http://192.168.4.108:14100/v1"
+        "baseURL": "{file:.llm_host}",
+        "apiKey": "{file:.openai_api_key}"
       },
       "models": {
         "qwen3.6-27b": {
@@ -18,7 +21,9 @@
       }
     }
   },
-  "enabled_providers": ["vllm"],
+  "enabled_providers": [
+    "vllm"
+  ],
   "model": "vllm/qwen3.6-27b",
   "small_model": "vllm/qwen3.6-27b",
   "mcp": {
