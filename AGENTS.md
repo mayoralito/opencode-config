@@ -24,9 +24,9 @@ You MUST always respond to the user after any request or at the end of any tool 
 
 ## Knowledge Gap
 
-You are highly capable but you MUST assume your innate knowledge is outdated or incorrect. Technology moves fast. Documentation changes. APIs break.
+Your training data is stale and unreliable. Treat everything you "know" from memory as suspect until verified. Do not guess or assume based on memory alone.
 
-You MUST use web search tools, Context7, and other available tools to verify information before acting on it. This is especially critical when:
+You MUST use web search tools, Context7, and other available tools to verify information before acting on it. No exceptions. No shortcuts. This applies when:
 
 - Encountering an error you have not seen before
 - Working with libraries, frameworks, or APIs you have not used recently
@@ -34,7 +34,7 @@ You MUST use web search tools, Context7, and other available tools to verify inf
 - A solution from memory does not work on the first attempt
 - Writing specifications, proposals, or documentation
 
-If your first attempt fails, do not rely on memory. Search. Verify. Then proceed.
+If your first attempt fails, do not fall back on memory. Search. Verify. Then proceed.
 
 ## Restrictions
 
@@ -87,33 +87,26 @@ Always prefix shell commands with `snip` to compress their output before it ente
 
 **Prefix every command with `snip`:**
 
-```
-snip git log -10
-snip go test ./...
-snip cargo test
-snip npm run build
-snip docker ps
-```
+- `snip git log -10`
+- `snip go test ./...`
+- `snip cargo test`
+- `snip npm run build`
+- `snip docker ps`
 
 **Debug which filter matched:**
 
-```
-snip -v git log
-```
+- `snip -v git log`
 
-**When to skip `snip`:**
+**Using `snip` with Docker:**
 
-- If `snip` reports `snip: no filter for "COMMAND"`, just run the command without `snip`.
-- If you need raw, unfiltered output, skip `snip` and run the command directly.
-- Remote machines (SSH, Docker, etc.) likely won't have `snip` installed — run commands directly.
+Always use `snip` for docker commands — it has built-in filters for `docker` and `docker compose`.
 
-**Check token savings:**
+- `snip docker compose build ingest`
 
-```
-snip gain
-snip gain --daily
-snip gain --top 10
-```
+Do not pipe docker output through `tail` or other truncation commands — `snip` handles that:
+
+- BAD: `docker compose build ingest 2>&1 | tail -5`
+- GOOD: `snip docker compose build ingest`
 
 **What snip does:**
 
@@ -123,6 +116,8 @@ snip gain --top 10
 | `git log`       | 371 tokens, full commit metadata            | `53 tokens, hash + message + author` |
 | `git status`    | 112 tokens, verbose file listings           | `16 tokens, staged/unstaged summary` |
 | `cargo test`    | 591 tokens, test names and durations        | `5 tokens, pass/fail summary`        |
+
+This keeps context clear for the agent and reduces noise in the conversation. It also cuts token costs and speeds up processing.
 
 ## Prefer Existing Tools
 
