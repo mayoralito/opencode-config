@@ -1,42 +1,79 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  // Adopted from https://dredyson.com/unlocking-grok-codes-power-advanced-optimizatioan-techniques-for-elite-developers/
+  // - Cache Read Mastery: setCacheKey enabled on providers
+  // - Hybrid Model Strategy: xai/Grok configured alongside anthropic
+  // - Constraint-Based Prompting & Triple-Lock: enforced via instructions, not config
   "lsp": true,
   "formatter": true,
+  "enabled_providers": ["anthropic", "xai"],
+  "model": "anthropic/claude-sonnet-4-6",
+  "small_model": "anthropic/claude-haiku-4-5-20251001",
+  "disabled_providers": [],
+  "plugin": [
+    "opencode-with-claude", 
+    "opencode-plugin-openspec",
+    "opencode-snip@latest"
+  ],
   "provider": {
-    "vllm": {
-      "npm": "@ai-sdk/anthropic",
-      "name": "vLLM",
+    "anthropic": {
       "options": {
-        "baseURL": "{file:.llm_host}",
-        "chunkTimeout": 18000000,
-      },
-      "models": {
-        "qwen3.6-27b": {
-          "name": "Qwen3.6 27b",
-          "limit": {
-            "context": 200000,
-            "output": 20000,
-          },
-          "modalities": { "input": ["text", "image"], "output": ["text"] },
-        },
-      },
+        "baseURL": "http://127.0.0.1:3456",
+        "apiKey": "dummy",
+        "timeout": 600000,
+        "chunkTimeout": 30000,
+        "setCacheKey": true
+      }
     },
+    "localllm": {
+      "name": "Local LLM",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "qwen3-coder-next-mlx": {
+          "name": "Qwen3-Coder-Next"
+        },
+        "google/gemma-4-31b": {
+            "name": "Google Gemma4"
+        }
+      },
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1",
+        "timeout": 600000,
+        "chunkTimeout": 30000,
+        "setCacheKey": true
+      }
+    },
+    "xai": {
+      "name": "xAI (Grok)",
+      // Uses official @ai-sdk/xai under the hood.
+      // Authenticate with: opencode auth login --provider xai
+      // Or set XAI_API_KEY environment variable.
+      "options": {
+        "baseURL": "https://api.x.ai/v1",
+        "timeout": 600000,
+        "chunkTimeout": 30000,
+        "setCacheKey": true
+      }
+      // You can override specific models here if needed:
+      // "models": {
+      //   "grok-4.3": { "name": "Grok 4.3" },
+      //   "grok-code-fast-1": { "name": "Grok Code Fast 1" }
+      // }
+    }
   },
-  "enabled_providers": ["vllm"],
-  "model": "vllm/qwen3.6-27b",
-  "small_model": "vllm/qwen3.6-27b",
   "mcp": {
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{file:.context7-api-key}",
+        "CONTEXT7_API_KEY": "{file:.context7-api-key}"
       },
+      "enabled": false
     },
     "svelte": {
       "type": "local",
       "command": ["npx", "-y", "@sveltejs/mcp"],
-    },
+      "enabled": false
+    }
   },
-  "plugin": ["@tarquinen/opencode-dcp@latest"],
 }
