@@ -1,9 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // Adopted from https://dredyson.com/unlocking-grok-codes-power-advanced-optimizatioan-techniques-for-elite-developers/
-  // - Cache Read Mastery: setCacheKey enabled on providers
-  // - Hybrid Model Strategy: xai/Grok configured alongside anthropic
-  // - Constraint-Based Prompting & Triple-Lock: enforced via instructions, not config
+  // Skills (surgical-edits, task-routing) and config patterns adopted from techniques in:
+  // https://dredyson.com/unlocking-grok-codes-power-advanced-optimizatioan-techniques-for-elite-developers/
+  // https://dredyson.com/5-costly-grok-free-on-cursor-mistakes-devs-make-and-how-to-avoid-them/
+  // https://dredyson.com/fix-grok-code-over-editing-in-cursor-the-3-minute-solution-proven-to-work/
+  // Source of skills: https://github.com/mayoralito/opencode-config
   "lsp": true,
   "formatter": true,
   "enabled_providers": ["anthropic", "xai"],
